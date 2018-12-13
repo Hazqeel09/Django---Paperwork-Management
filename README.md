@@ -13,6 +13,7 @@
 3. Go to hafyq/settings.py and change database setting
 4. Type :
    >python manage.py makemigrations
+   
    >python manage.py migrate
 5. If there are no problem, you can type :
    >python manage.py runserver
