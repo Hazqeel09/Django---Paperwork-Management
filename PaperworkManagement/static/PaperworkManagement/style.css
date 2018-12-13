@@ -1,0 +1,300 @@
+@charset "ISO-8859-1";
+
+p, h1, h2, h3, h4, h5, h6, label{
+	font-family: Arial, Verdana, sans-serif;
+	color: black;
+}
+
+#opening_title{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+#title{
+	text-decoration: none;
+	color: #ebfefb;
+	font-family : Helvetica;
+	
+}
+
+#login_register{
+	padding: 9px;
+	margin: 0;
+	float: right;
+	color: white;
+}
+
+#login, #register{
+	color: white;
+	text-decoration: none;
+}
+
+body{
+	height: 100%;
+	min-height: 100%;
+	background : #ebfefb;
+	margin: 0;
+    padding: 0;
+}
+
+#userppw{
+	padding : 15px;
+}
+
+header{
+	height : 159px;
+	width : 100%;
+	margin: 0px auto;
+	padding: 0px;
+	top: 0px;
+	left: 0px;
+	right : 0px;
+	background-color: #214758;
+}
+
+img.Logo{
+	width: 90px;
+	height: 90px;
+	padding : 9px;
+	margin : 9px;
+}
+
+.title_navigate{
+	width: 100%;
+	height : 21px;
+	background: #214758;
+	font-family : Calibri, Candara, Segeo;
+	font-size : 16px;
+}
+
+ul {
+	padding: 0px;
+	margin: 0px auto 0px auto;
+	text-align: center;
+	float : bottom;}
+li{
+	text_align : left;
+}
+
+#li1{
+	display: inline;
+	margin: 0px 39px;
+	
+}
+
+#budgetAnalysisExplaination{
+	display: block;
+    padding-left: 40px;
+    text-align:left;
+    font-family : Arial, Helvetica, Verdana, sans-serif;
+	font-size:18px;
+}
+
+#analysisList{
+	padding:9px;
+}
+
+#a1,#a2,#a3,#a4,#a5{
+	color: white;
+	text-decoration: none;
+}
+
+#linkInTable{
+	color: black;
+	text-decoration: none;
+}
+
+.content{
+	width: 100%;
+	postition : relative;
+	padding-bottom: 159px;
+}
+	
+a : link {
+	color: blue;
+	text-decoration: none;
+}
+	
+a: hover{
+	color : red;
+}
+	
+fieldset{
+	margin : 150px auto;
+	height: auto+15px;
+    position: relative;
+	width: 30%;
+	background : rgba(33, 71, 88, 0.3);
+	
+	}
+	
+#write_ppw,#ppwdetail{
+	margin : 15px auto;
+	height: auto;
+	width: 159px;
+	background : rgba(33, 71, 88, 0.3);
+	font-family : Arial, Helvetica, Verdana, sans-serif;
+	font-size:16px;
+}
+		
+legend{
+	font-weight: bold;
+	}
+	
+.signupform{
+	margin: auto auto;
+	width : 30%;
+	height: auto;
+}
+
+#divloginform{
+	height: auto;
+	width: 50%px;
+	margin: 15px auto;
+	padding: 15px;
+}
+
+#loginform{
+	margin: auto auto;
+	width : 30%;
+	height: 159px;
+}
+
+#loginusername,#loginpassword,#form100{
+	width: 100%;
+}
+
+textarea {
+	font-family : Arial, Helvetica, Verdana, sans-serif;
+	font-size:16px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+
+table {
+	text-align: left;
+	border-collapse: collapse;
+	margin: 15px auto;
+	width: 90%;
+	padding: 50px;
+    border-spacing: 0;
+    font-family : Arial, Helvetica, Verdana, sans-serif;
+	font-size:16px;
+	background : rgba(33, 71, 88, 0.3);
+}
+
+table, th, td {
+  border: 3px solid white;
+}
+
+th, td {
+  padding: 15px;
+}
+
+tr:hover {background-color: lightgreen;}
+
+#saveBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: #0080ff; /* Set a background color */
+    color: black; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+    width: 159px;
+    -webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+}
+
+#saveBtn:hover {
+	width: 500px;
+	color : white;
+    background-color: green; /* Add a dark-grey background on hover */
+}
+
+#moreWords{
+	display : none;
+}
+
+#backBtn {
+   	display: block; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    left: 30px; /* Place the button 30px from the right */
+    z-index: 98; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: #424242; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+    width: 159px;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+}
+
+#backBtn:hover {
+	width: 300px;
+	color : black;
+    background-color: #c0c0c0; /* Add a dark-grey background on hover */
+}
+
+#totalbudget{
+	text-align: center;
+	margin: 15px auto;
+	width: 50%;
+	padding: 15px;
+	background : rgba(33, 71, 88, 0.5);
+}
+
+#finishedppw,#unfinishedppw{
+	text-align: center;
+	margin: 15px auto;
+	width: 50%;
+	padding: 15px;
+}
+
+#budgetspend{
+	text-align: center;
+	margin: auto;
+	width: 90%;
+	padding: 15px;
+	background : rgba(33, 71, 88, 0.3);
+}
+
+
+#graphbudget, #graphbulan, #piechart{
+	text-align: center;
+	margin: auto;
+	width: 73%;
+}
+
+#budgetanalysis{
+	font-size : 18px;
+	padding : 15px;
+	margin : 15px auto;
+	width: 90%;
+	background : rgba(33, 71, 88, 0.3);
+}
+
+#analysis{
+	font-size : 20px;
+	text-align: center;
+}

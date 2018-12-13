@@ -1,0 +1,26 @@
+{% extends "PaperworkManagement/index.html" %}
+{% load static %}
+
+{% block user_content %}
+	{% if allppw_list %}
+	<div style="overflow-x:auto;">
+		<table style="width:auto + 15px">	
+			<tr>
+				<th>Event Name</th>
+			    <th>Expected Event Date</th>
+			    <th>Organize by</th>
+			</tr>
+		{% for ppw in allppw_list %}
+		  <tr>
+		    <td>{{ppw.tajukppw}}</a></td>
+		    <td>{{ppw.stats_tarikh}}</td> 
+		    <td>{{ppw.org.orgname}}</td> 
+		  </tr>
+		{% endfor %}
+		</table>
+	</div>
+	{% else %}
+		<p style = "text-align:center;">There are no upcoming events for now</p>
+	{% endif %}
+
+{% endblock user_content%}

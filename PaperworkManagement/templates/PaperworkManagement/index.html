@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link href="{% static 'PaperworkManagement/style.css' %}" type="text/css" rel="stylesheet" />
+<link href="https://cdn.pydata.org/bokeh/release/bokeh-1.0.1.min.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.pydata.org/bokeh/release/bokeh-1.0.1.min.js"></script>
+{% block head %}
+{%endblock%}
+<title>{% block title %}Paperwork System{% endblock %}</title>
+<link rel="shortcut icon" type="image/png" href="{% static '/gallery/Logo.png' %}"/>
+</head>
+<body>
+	<header>
+	{% block login_logout %}
+	{% if user.is_authenticated %}
+		{% if perms.PaperworkManagement.change_dbppw %}
+		<p id = "login_register"><a id = "login" href = "#">{{user.username}}</a> | <a id = "register" href = "{% url 'PaperworkManagement:logout' %}">Logout</a></p>
+		<h1 id = "opening_title"><img src ="{% static '/gallery/FrontLogo.png' %}" alt="Logo" class = "Logo"/><a id = "title" onclick = "loadScreen()" href = "{% url 'PaperworkManagement:view_ppw' %}">Paperwork Management System</a></h1>
+		{% else %}
+		<p id = "login_register"><a id = "login" href = "#">{{user.username}}</a> | <a id = "register" href = "{% url 'PaperworkManagement:logout' %}">Logout</a></p>
+		<h1 id = "opening_title"><img src ="{% static '/gallery/FrontLogo.png' %}" alt="Logo" class = "Logo"/><a id = "title" onclick = "loadScreen()" href = "{% url 'PaperworkManagement:index' %}">Paperwork Management System</a></h1>
+		{% endif %}
+	{% else %}
+		<p id = "login_register"><a id = "login" href = "{% url 'PaperworkManagement:login' %}">Login</a> | <a id = "register" href = "{% url 'PaperworkManagement:signup' %}">Register</a></p>
+		<h1 id = "opening_title"><img src ="{% static '/gallery/FrontLogo.png' %}" alt="Logo" class = "Logo"/><a id = "title" href = "{% url 'PaperworkManagement:index' %}">Paperwork Management System</a></h1>
+	{% endif %}
+	{% endblock %}		
+	</header>
+	<div class = "title_navigate">
+	{% block navigate %}
+	{% if user.is_authenticated %}
+		{% if perms.PaperworkManagement.change_dbppw %}
+			<ul class="pages_navigation"> <!-- Admin navigation-->
+				<li id = "li1"><a id = "a1" href="{% url 'PaperworkManagement:write_ppw' %}">Write Paperwork</a></li>
+				<li id = "li1"><a id = "a2"  href="{% url 'PaperworkManagement:view_org'%}">View Organization</a></li>
+			</ul>
+		{% else %}
+			<ul class="pages_navigation"> <!-- User navigation -->
+				<li id = "li1"><a id = "a2"  href="{% url 'PaperworkManagement:upcoming' %}">Upcoming Events</a></li>
+			</ul>
+		{% endif %}
+	{% else %}
+		<ul class="pages_navigation"> <!-- Visitors navigation -->
+			<li id = "li1"><a id = "a1" href="#">About</a></li>
+			<li id = "li1"><a id = "a2"  href="#">View Article</a></li>
+			<li id = "li1"><a id = "a3"  href="#">Upcoming Events</a></li>
+			<li id = "li1"><a id = "a4"  href="#">Pricing</a></li>
+			<li id = "li1"><a id = "a5"  href="#">Contact</a></li>
+		</ul>
+	{% endif %}
+	{% endblock %}
+	</div>
+	<div class = "content">
+	{% if user.is_authenticated %}
+		{% if perms.PaperworkManagement.change_dbppw %}
+			{%block auth_content %}
+			{% if success %}<p>{{success}}</p>{% endif %}
+			{%endblock%}
+		{% else %}
+			{%block user_content %}
+			{% if success %}<p>{{success}}</p>{% endif %}
+			{%endblock%}
+		{% endif %}
+	{% else %}
+		{%block content %}
+		{% if success %}<p>{{success}}</p>{% endif %}
+		{%endblock%}
+	{% endif %}
+	</div>
+	<div id="loadpage" style="position:absolute; 
+    left:0px; top:0px; background-color:white; 
+    layer-background-color:white; height:100%; 
+    width:100%; display : none"> 
+      <p align="center" style="font-size: large;">
+        <img src= "{% static '/gallery/loading.gif' %}">
+        <B>Fetching Data</B>
+      </p>
+</div>
+	<footer>
+	</footer>
+	<script type="text/javascript">
+	function savePaper(){
+		var button  = document.getElementById('saveBtn');
+		var check = document.getElementById('paperworkcode').value;
+		
+		if (check == "" || check == null){
+			button.style.display = 'none';
+		}else{
+			button.style.display = 'block';
+		}
+	} 
+	
+	function showWords(){
+		var button  = document.getElementById('moreWords');
+		button.style.display = 'block';
+	}
+	
+	function hideWords(){
+		var button  = document.getElementById('moreWords');
+		button.style.display = 'none';
+	}
+	
+	function loadScreen(){
+		document.getElementById("loadpage").style.display = 'block';
+	}
+	{% block script %}
+	{% endblock %}
+	</script>
+</body>
+</html>

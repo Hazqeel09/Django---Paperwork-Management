@@ -1,0 +1,29 @@
+{% extends "PaperworkManagement/index.html" %}
+
+{% block content %}
+<h2 style = "text-align:center" >Sign Up Organization</h2>
+  	<p style = "text-align:center">Organization code will be use for admin login<br>It must be alphanumeric and unique</p>
+ <form action = "{% url 'PaperworkManagement:process_org' %}" method="post">
+    {% csrf_token %}
+    <fieldset class = "signupform">
+		<label>Organization name: <br />
+		<input id = "form100" type = "text" name = "orgname" required/></label><br />
+		<br>
+		<label>Organization code: <br />
+		<input id = "form100" type = "text" name = "orgcode" required/></label><br />
+		<br>
+		<label>Organization password: <br />
+		<input id = "form100" type = "password" name = "orgpassword" required/></label><br />
+		<br>
+		<label>Retype organization password: <br />
+		<input id = "form100" type = "password" name = "orgrepassword" required/></label><br />
+		<br>
+		<br>
+		<label>
+		<input type = "submit" value = "Sign Up Organization" />
+		</label>
+	</fieldset>  
+ 	</form>
+  	{% if error_message %}<p><b>{{error_message}}</b></p>{% endif %}
+
+{% endblock %}

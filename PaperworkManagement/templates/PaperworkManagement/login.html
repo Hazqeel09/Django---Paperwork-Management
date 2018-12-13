@@ -1,0 +1,26 @@
+{% extends "PaperworkManagement/index.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<p style = "text-align:center">You already logged in</p>
+{% else %}
+<h2 style = "text-align:center">Login</h2>
+<div id = "divloginform">
+<form action = "{% url 'PaperworkManagement:auth_user' %}" method = "post">
+		{%csrf_token %}
+		<fieldset id = "loginform">
+		<label>Username: <br />
+		<input id = "loginusername" type = "text" name = "username" required/></label><br />
+		<label>Password: <br />
+		<input id = "loginpassword" type = "password" name = "password" required/></label><br />
+		<label>
+		<br />
+			<input style = "text-align:center" type = "submit" value = "Login" />
+		</label>
+		</fieldset>  
+</form>
+</div>
+		{% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif %}
+{% endif %}
+{% endblock %}

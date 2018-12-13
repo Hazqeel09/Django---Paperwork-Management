@@ -1,0 +1,34 @@
+{% extends "PaperworkManagement/index.html" %}
+
+{% block content %}
+<div class="sidebar" style="width: 50%; float: left;">
+		<h2 style = "text-align:center" >Sign Up Admin</h2>
+        <form action = "{% url 'PaperworkManagement:process_admin' %}" method="post">
+    {% csrf_token %}
+    <fieldset class = "signupform">
+		<label>User name: <br />
+		<input id = "form100" type = "text" name = "username" required/></label><br />
+		<label>User email: <br />
+		<input id = "form100" type = "email" name = "email" required/></label><br />
+		<label>Password: <br />
+		<input id = "form100" type = "password" name = "password" required/></label><br />
+		<label>Retype password: <br />
+		<input id = "form100" type = "password" name = "repassword" required/></label><br />
+		<p style = "text-align:center">___ Organization __</p>
+		<label>Organization Code: <br />
+		<input id = "form100" type = "text" name = "orgcode" required/></label><br />
+		<label>Password: <br />
+		<input id = "form100" type = "password" name = "orgpass" required/></label><br /><br>
+		<label>
+		<input type = "submit" value = "Sign Up As Admin" />
+		</label>
+	</fieldset>  
+	   </form>
+  	{% if error_message %}<p>{{error_message}}</p>{% endif %}
+    </div>
+    <div class="content" style="margin-left: 50%+3;">
+    	<p>Can not find your organization?</p>
+    	<p id = "signup_admin"><a id = "signup_admin" href = "{% url 'PaperworkManagement:signup_org' %}">Sign up your organization instead.</a></p>
+    </div>
+
+{% endblock %}

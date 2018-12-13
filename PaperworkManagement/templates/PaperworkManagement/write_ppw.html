@@ -1,0 +1,187 @@
+{% extends "PaperworkManagement/index.html" %}
+
+{% block auth_content %}
+		
+<form action = "{% url 'PaperworkManagement:process_ppw' %}" method = "post">
+		{%csrf_token %}
+		{% if not user.first_name %}
+		<p><strong>This is your first time, you need to provide your name : </strong></p>
+		<label>First Name:
+		<input style = "Width:390px" type = "text" rows = "9" name = "firstname" required></textarea></label><br />
+		<br />
+		<label>Last Name:
+		<input style = "Width:390px" type = "text" rows = "9" name = "lastname" required></textarea></label><br />
+		<br />
+	
+		{%endif%}
+		<fieldset id = "ppwdetail">
+		<legend>Paperwork Details: </legend>
+		<label>Paperwork Code: <br>
+		<input id = "paperworkcode" type = "text" name = "ppwcode" onkeyup="savePaper()" required value = {{ppwcode}}></label>
+		
+		</fieldset>
+		{% if code_error_message %}<p><strong>{{code_error_message}}</strong></p>{% endif %} 
+		<fieldset id = "write_ppw">
+		<legend>Paperwork Informations</legend>
+		
+		<label>Tajuk: <br />
+		<input style = "Width:390px" type = "text" name = "tajukppw" onkeyup="savePaper()" value = "{{tajuk}}" ></textarea></label><br />
+		<br />
+		
+		<label>1.0 Tujuan: <br />
+		<textarea rows = "9" cols = "90" name = "tujuan" onkeyup="savePaper()">{{tujuan}}</textarea></label><br />
+		<br />
+		
+		<label>2.0 Latar Belakang: <br />
+		<textarea rows = "9" cols = "90" name = "latar" onkeyup="savePaper()">{{latar}}</textarea></label><br />
+		<br />
+		
+		<label>3.0 Objektif: <br />
+		<textarea rows = "9" cols = "90" name = "obj" onkeyup="savePaper()">{{obj}}</textarea></label><br />
+		<br />
+		
+		<label>4.0 Anjuran: <br />
+		<textarea rows = "9" cols = "90" name = "anjuran" onkeyup="savePaper()">{{anjuran}}</textarea></label><br />
+		<br />
+		
+		<label>5.0 Cadangan Tarikh Dan Tempat: <br />
+		<textarea rows = "9" cols = "90" name = "cadangantarikh" onkeyup="savePaper()">{{tarikh}}</textarea></label><br />
+		<br />
+		
+		<label>Program/Event Date: <br>
+		<input id = "paperworkcode" type = "date" name = "ppwtarikh" onkeyup="savePaper()" required value = "{{ppwtarikh|date:"Y-m-d"}}"></label><br>
+		<br>
+		
+		<label>6.0 Penyertaan: <br />
+		<textarea rows = "9" cols = "90" name = "penyertaan" onkeyup="savePaper()">{{peserta}}</textarea></label><br />
+		<br />
+		
+		<label>6.1 Jumlah Bilangan Peserta: <br>
+		<input type = "text" name = "ppwpeserta" onkeyup="savePaper()" value = {{bilpeserta}}></label><br>
+		<br>
+		
+		<label>7.0 Jawatankuasa: <br />
+		<textarea rows = "9" cols = "90" name = "ajk" onkeyup="savePaper()">{{ajk}}</textarea></label><br />
+		<br />
+		
+		<label>8.0 Implikasi Kewangan: <br />
+		<textarea rows = "9" cols = "90" name = "impkewangan" onkeyup="savePaper()">{{impwang}}</textarea></label><br />
+		<br />
+		
+		<label>8.1 Keseluruhan Bajet Aktiviti: <br>
+		<input type = "text" name = "ppwbudget" onkeyup="savePaper()" value = {{bajet}}></label><br>
+		<br>
+		
+		<p>Pecahan Bajet</p>
+		<button type="button" onclick="showStatsBudgetMakanan()" >Bajet Makanan(Jika ada).</button>
+		<label id = "statsBM" style = "display:none">8.1.1 Bajet Makanan: <br>
+		<input type = "text" name = "ppwbudget_makanan" onkeyup="savePaper()" value = {{bajetmakanan}}></label><br>
+		<br>
+		
+		<button type="button" onclick="showStatsBudgetPengangkutan()">Bajet Pengangkutan(Jika ada).</button>
+		<label id = "statsBPA" style = "display:none">8.1.2 Bajet Pengangkutan: <br>
+		<input type = "text" name = "ppwbudget_pengangkutan" onkeyup="savePaper()" value = {{bajetpengangkutan}}></label><br>
+		<br>
+		
+		<button type="button" onclick="showStatsBudgetPenginapan()">Bajet Penginapan(Jika ada)</button>
+		<label id = "statsBPI" style = "display:none">8.1.3 Bajet Penginapan: <br>
+		<input type = "text" name = "ppwbudget_penginapan" onkeyup="savePaper()" value = {{bajetpenginapan}}></label><br>
+		<br>
+		
+		<button type="button" onclick="showStatsBudgetHadiah()">Bajet Hadiah(Jika ada)</button>
+		<label id = "statsBH" style = "display:none">8.1.4 Bajet Hadiah: <br>
+		<input type = "text" name = "ppwbudget_hadiah" onkeyup="savePaper()" value = {{bajethadiah}}></label><br>
+		<br>
+		
+		<label>9.0 Kesimpulan: <br />
+		<textarea rows = "9" cols = "90" name = "kesimpulan" onkeyup="savePaper()">{{kesimpulan}}</textarea></label><br />
+		<br />
+		
+		<label>Jawatan Anda : <br />
+		<input style = "Width:390px" type = "text" name = "jawatansaya" onkeyup="savePaper()" value = "{{jawatan}}" ></textarea></label><br />
+		<br />
+		
+		<label>Disokong Oleh : <br />
+		<input style = "Width:390px" type = "text" name = "namasokong" onkeyup="savePaper()" value = "{{namasokong}}" ></textarea></label><br />
+		<br />
+		
+		<label>Jawatan Penyokong(Contoh : Dekan/Ketua Jabatan) : <br />
+		<input style = "Width:390px" type = "text" name = "jawatansokong" onkeyup="savePaper()" value = "{{jawatansokong}}" ></textarea></label><br />
+		<br />
+		
+		<label>Tempat Jawatan Disandang : <br />
+		<input style = "Width:390px" type = "text" name = "lokasisokong" onkeyup="savePaper()" value = "{{lokasisokong}}" ></textarea></label><br />
+		<br />
+		
+		<!--
+		<label>Lampiran: <br />
+		<input type = "file" name ="lampiran"></label><br />
+		<br />
+		-->
+		{% if ppwcode %}
+		<label>
+		<br />
+			<input name = "Edit" type = "submit" value = "Process Updated Paperwork" />
+		</label>
+		{% else %}
+		<label>
+		<br />
+			<input name = "Process" type = "submit" value = "Process Paperwork" />
+		</label>
+		{%endif%}
+			<button name = "Save" type = "submit" id="saveBtn" title="Save first, continue later" onmouseover = "showWords()" onmouseout = "hideWords()">Save... <span id="moreWords">Continue later</span></button>
+		</form>
+		<p>If you are done, you can go to next page</p>
+		<form action = "{% url 'PaperworkManagement:done_ppw' %}" method = "post">
+		{%csrf_token %}
+			<input name  = "Done" type = "submit" value = "Next Page"/>
+			<button name = "Back" type = "submit" id="backBtn" title="Back to dashboard" >Back</button>
+		</form>
+			{% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif %} 
+		</fieldset>
+
+
+{% endblock %}
+
+{% block script %}
+function showStats(){
+		var x = document.getElementById('stats');
+	    if (x.style.display === 'none') {
+	        x.style.display = 'block';
+	    } else {
+	        x.style.display = 'none';
+	    }
+	}
+function showStatsBudgetMakanan(){
+		var x = document.getElementById('statsBM');
+	    if (x.style.display === 'none') {
+	        x.style.display = 'block';
+	    } else {
+	        x.style.display = 'none';
+	    }
+	}
+function showStatsBudgetPengangkutan(){
+		var x = document.getElementById('statsBPA');
+	    if (x.style.display === 'none') {
+	        x.style.display = 'block';
+	    } else {
+	        x.style.display = 'none';
+	    }
+	}
+function showStatsBudgetPenginapan(){
+		var x = document.getElementById('statsBPI');
+	    if (x.style.display === 'none') {
+	        x.style.display = 'block';
+	    } else {
+	        x.style.display = 'none';
+	    }
+	}
+function showStatsBudgetHadiah(){
+		var x = document.getElementById('statsBH');
+	    if (x.style.display === 'none') {
+	        x.style.display = 'block';
+	    } else {
+	        x.style.display = 'none';
+	    }
+	}
+{% endblock %}

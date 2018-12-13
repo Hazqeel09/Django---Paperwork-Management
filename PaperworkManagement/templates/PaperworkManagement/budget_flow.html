@@ -1,0 +1,72 @@
+{% extends "PaperworkManagement/index.html" %}
+
+{% block head %}
+{{the_script|safe}}
+{{the_script2|safe}}
+{{the_script3|safe}}
+{% endblock %}
+
+{% block navigate %}
+
+	<ul class="pages_navigation">
+		<li id = "li1"><a id = "a1" href="{% url 'PaperworkManagement:view_org' %}">Organization Overview</a></li>
+		<li id = "li1"><a onclick = "loadScreen()" id = "a1" href="{% url 'PaperworkManagement:budget_flow' %}">Budget Flow</a></li>
+		<li id = "li1"><a id = "a1" href="{% url 'PaperworkManagement:view_ppw' %}">My Paperwork</a></li>
+	</ul>
+
+{% endblock %}
+
+{% block auth_content %}
+<div id = "totalbudget">
+	<h2>Organization total budget spent: RM{{total |floatformat:"-2"}} </h2>
+</div>
+
+<div id = "budgetspend">
+	<h2><b>Budget spent overview</b></h2>
+	
+	<div id = "graphbudget">
+	{{the_div|safe}}
+	</div>
+	
+	<br>
+	
+	<div id = "piechart">
+	{{the_div2|safe}}
+	</div>
+	
+	<br>
+	
+	<div id = "graphbulan">
+	{{the_div3|safe}}
+	</div>
+</div>
+<div id = "budgetanalysis">
+	<div id = "analysis">
+	<h2><b>Budget Analysis</b></h2>
+	</div>
+	<div>
+	<br>
+	<ul id = "budgetAnalysisExplaination">
+	  <li id = "analysisList">Budget Analysis will take data from previous paperwork done</li>
+	  <li id = "analysisList">By providing average budget spent per budget proportion, your organization can make budget predictions for coming event</li>
+	  <li id = "analysisList">By identifying highest budget type spent, your organization need to take steps reducing budget for this type</li>
+	</ul>
+	<br>
+	</div>
+	<p>Amount of programs that require food budget : {{bilmakan}} / {{aktiviti}}</p>
+	<p>Average budget spent for food per programs : RM{{avgmakan |floatformat:"-2" }}</p>
+	<br>
+	<p>Amount of programs that require transport budget : {{biltransport}} / {{aktiviti}}</p>
+	<p>Average budget spent for transport per programs : RM{{avgtransport |floatformat:"-2"}}</p>
+	<br>
+	<p>Amount of programs that require accomodation budget : {{bilpenginapan}} / {{aktiviti}}</p>
+	<p>Average budget spent for accomodation per programs : RM{{avgpenginapan |floatformat:"-2"}}</p>
+	<br>
+	<p>Amount of programs that require prize budget : {{bilhadiah}} / {{aktiviti}}</p>
+	<p>Average budget spent for prize per programs : RM{{avghadiah |floatformat:"-2"}}</p>
+	<br>
+	<p>The highest budget type spent per program is : {{highest}}</p>
+	<p>The lowest budget type spent per program is : {{lowest}}</p>
+</div>
+
+{% endblock %}

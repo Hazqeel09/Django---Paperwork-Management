@@ -1,0 +1,51 @@
+{% extends "PaperworkManagement/index.html" %}
+{% load static %}
+{% block head %}
+
+{% endblock %}
+
+{% block navigate %}
+
+	<ul class="pages_navigation">
+		<li id = "li1"><a id = "a1" href="{% url 'PaperworkManagement:view_org' %}">Organization Overview</a></li>
+		<li id = "li1"><a onclick = "loadScreen()" id = "a1" href="{% url 'PaperworkManagement:budget_flow' %}">Budget Flow</a></li>
+		<li id = "li1"><a id = "a1" href="{% url 'PaperworkManagement:view_ppw' %}">My Paperwork</a></li>
+	</ul>
+
+{% endblock %}
+
+{% block auth_content %}
+	
+	{% if ppw_list %}
+	<div style="overflow-x:auto;">
+		<table style="width:auto + 15px">	
+			<tr>
+				<th>Paperwork Title</th>
+			    <th>Written By</th> 
+			    <th>Date Written</th>
+			    <th>Event Date</th>
+			</tr>
+		{% for ppw in ppw_list %}
+		  <tr>
+		    <td><a id = "linkInTable" href = "{% url 'PaperworkManagement:dlppw' ppw.ppwcode %}">{{ppw.tajukppw}}</a></td>
+		    <td>{{ppw.penulisppw}}</td> 
+		    <td>{{ppw.tarikhppw}}</td>
+		    <td>{{ppw.stats_tarikh}}</td>
+		  </tr>
+		{% endfor %}
+		</table>
+	</div>
+	{% else %}
+		<p style = "text-align:center;">Your organization did not have any paperwork done yet</p>
+	{% endif %}
+	<div id="loadpage" style="position:absolute; 
+    left:0px; top:0px; background-color:white; 
+    layer-background-color:white; height:100%; 
+    width:100%; display : none"> 
+      <p align="center" style="font-size: large;">
+        <img src= "{% static '/gallery/loading.gif' %}">
+        <B>Preparing Budget Flow</B>
+      </p>
+	</div>
+
+{% endblock auth_content%}

@@ -1,0 +1,55 @@
+{% extends "PaperworkManagement/index.html" %}
+{% load static %}
+
+
+{% block auth_content %}
+	<div id = "userppw">
+	<h2 id = "unfinishedppw">Unfinished Paperwork</h2>
+	{% if undone_ppw_list %}
+	<div style="overflow-x:auto;">
+		<table style="width:auto + 15px">	
+			<tr>
+				<th>Paperwork Title</th>
+			    <th>Date</th> 
+			    <th>Update</th>
+			    <th>Delete</th>
+			</tr>
+		{% for ppw in undone_ppw_list %}
+		  <tr>
+		    <td><a id = "linkInTable" href = "{% url 'PaperworkManagement:dlppw' ppw.ppwcode %}">{{ppw.tajukppw}}</a></td>
+		    <td>{{ppw.stats_tarikh}}</td>
+		    <td><a id = "linkInTable" href = "{% url 'PaperworkManagement:update_ppw' ppw.ppwcode %}">Update</a></td>
+		    <td><a id = "linkInTable" href = "{% url 'PaperworkManagement:delete_ppw' ppw.ppwcode %}">Delete</a></td>
+		  </tr>
+		{% endfor %}
+		</table>
+	</div>
+	{% else %}
+		<p style = "text-align:center;">You did not have any unfinished paperwork yet</p>
+	{% endif %}
+	<br>
+	<h2 id = "finishedppw">Finished Paperwork</h2>
+	{% if done_ppw_list %}
+	<div style="overflow-x:auto;">
+		<table style="width:auto + 15px">	
+			<tr>
+				<th>Paperwork Title</th>
+			    <th>Date Written</th> 
+			    <th>Update</th>
+			    <th>Delete</th>
+			</tr>
+		{% for ppw in done_ppw_list %}
+		  <tr>
+		    <td><a id = "linkInTable" href = "{% url 'PaperworkManagement:dlppw' ppw.ppwcode %}">{{ppw.tajukppw}}</a></td>
+		    <td>{{ppw.tarikhppw}}</td>
+		    <td><a id = "linkInTable" href = "{% url 'PaperworkManagement:update_ppw' ppw.ppwcode %}">Update</a></td>
+		    <td><a id = "linkInTable" href = "{% url 'PaperworkManagement:delete_ppw' ppw.ppwcode %}">Delete</a></td>
+		  </tr>
+		{% endfor %}
+		</table>
+	</div>
+	{% else %}
+		<p style = "text-align:center;">You did not write any paperwork yet</p>
+	{% endif %}
+	</div>
+{% endblock %}
